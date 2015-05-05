@@ -8,12 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UITableViewController, UITableViewDataSource {
 
+//  var moviesDictionaries: Dictionary
+  
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
-    
-    
     
     
   }
@@ -28,6 +28,13 @@ class ViewController: UIViewController, UITableViewDataSource {
     // Dispose of any resources that can be recreated.
   }
 
-
+  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 0//moviesDictionaries?.count
+  }
+//  
+//  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//    
+//    return 0
+//    
+//  }
 }
-

@@ -4,6 +4,7 @@ use_frameworks!
 
 target 'RottenTomatoes' do
   pod 'SVProgressHUD'
+  pod 'AFNetworking'
 end
 
 target 'RottenTomatoesTests' do
