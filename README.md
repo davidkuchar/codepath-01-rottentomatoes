@@ -11,7 +11,7 @@ Rotten Tomatoes Dummy Data [#1](https://gist.githubusercontent.com/timothy1ee/d1
 
 API Key: "av2w54dpqt9fatk3tccb8b9w"
 
-Time spent: 4.13 hours
+Time spent: 4.34 hours
 
 ### Features
 
