@@ -8,9 +8,6 @@
 
 //TODO
 //
-//1. User can view a list of movies from Rotten Tomatoes. Poster images must be loading asynchronously.
-//2. User can view movie details by tapping on a cell.
-//3. Hint: The Rotten Tomatoes API stopped returning high resolution images. To get around that, use the URL to the thumbnail poster, but replace 'tmb' with 'ori'.
 //4. User sees loading state while waiting for movies API. You can use one of the 3rd party libraries at http://cocoapods.wantedly.com?q=hud.
 //5. User sees error message when there's a networking error. You may not use UIAlertView or a 3rd party library to display the error. See this screenshot for what the error message should look like: network error screenshot.
 //6. User can pull to refresh the movie list. Guide: Using UIRefreshControl
@@ -21,9 +18,7 @@ class MoviesTableViewController: UITableViewController {
 
     var moviesDictionaries: [NSDictionary]?
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
+    func loadMoviesData() {
         let RottenTomatoesURLString = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=f2fk8pundhpxf77fscxvkupy"
         let request = NSMutableURLRequest(URL: NSURL(string: RottenTomatoesURLString)!)
         NSURLConnection.sendAsynchronousRequest(request,
@@ -32,18 +27,30 @@ class MoviesTableViewController: UITableViewController {
                 if let dictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as! NSDictionary? {
                     self.moviesDictionaries = dictionary["movies"] as? [NSDictionary]
                     self.tableView.reloadData()
-                    NSLog("Dictionary: \(dictionary)")
+                    self.refreshControl?.endRefreshing()
+                    
+//                    NSLog("Dictionary: \(dictionary)")
                 } else {
-            
-            
-            }
+                    
+                    
+                }
         })
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.loadMoviesData()
+    }
 
+    @IBAction func refreshMovies(sender: AnyObject) {
+        self.loadMoviesData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view, typically from a nib.
+        
     }
 
     override func didReceiveMemoryWarning() {

@@ -54,6 +54,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Movies" id="9xq-dk-Zbk"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="jQj-bO-Jyd">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <attributedString key="attributedTitle"/>
+                        <connections>
+                            <action selector="refreshMovies:" destination="8kE-qL-Obw" eventType="valueChanged" id="8Og-UI-RUZ"/>
+                        </connections>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FSK-of-yhm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
