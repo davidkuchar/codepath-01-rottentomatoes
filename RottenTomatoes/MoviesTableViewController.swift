@@ -17,7 +17,7 @@ import SVProgressHUD
 class MoviesTableViewController: UITableViewController {
 
     var moviesDictionaries: [NSDictionary]?
-    let rottenTomatoesURLString = "http://api.rottentomatoes.com/api/pulic/v1.0/lists/dvds/top_rentals.json?apikey=f2fk8pundhpxf77fscxvkupy"
+    let rottenTomatoesURLString = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=f2fk8pundhpxf77fscxvkupy"
 
     @IBOutlet weak var networkingErrorAlertView: UIView!
 
