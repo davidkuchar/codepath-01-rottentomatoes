@@ -10,9 +10,9 @@
 //
 //4. User sees loading state while waiting for movies API. You can use one of the 3rd party libraries at http://cocoapods.wantedly.com?q=hud.
 //5. User sees error message when there's a networking error. You may not use UIAlertView or a 3rd party library to display the error. See this screenshot for what the error message should look like: network error screenshot.
-//6. User can pull to refresh the movie list. Guide: Using UIRefreshControl
 
 import UIKit
+import SVProgressHUD
 
 class MoviesTableViewController: UITableViewController {
 
@@ -28,17 +28,21 @@ class MoviesTableViewController: UITableViewController {
                     self.moviesDictionaries = dictionary["movies"] as? [NSDictionary]
                     self.tableView.reloadData()
                     self.refreshControl?.endRefreshing()
+                    SVProgressHUD.dismiss()
                     
-//                    NSLog("Dictionary: \(dictionary)")
+                    NSLog("Dictionary: \(dictionary)")
                 } else {
                     
                     
                 }
-        })
+            }
+        )
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+
+        SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Gradient)
         self.loadMoviesData()
     }
 
@@ -50,6 +54,8 @@ class MoviesTableViewController: UITableViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
+        
+        
         
     }
 
