@@ -35,7 +35,7 @@ Time spent: 4.13 hours
 
 ### Walkthrough
 
-![Video Walkthrough](RottenTomatoes.gif)
+![Video Walkthrough](RottenTomatoes_RequiredOnly.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
