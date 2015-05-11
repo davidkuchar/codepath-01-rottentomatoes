@@ -2,6 +2,8 @@
 
 This is a movies app displaying box office and top rental DVDs using the [Rotten Tomatoes API](http://developer.rottentomatoes.com/docs/read/JSON).
 
+I've done only the required steps so far, I'm going to keep working on this on Monday.
+
 Assignment can be found [here](http://courses.codepath.com/courses/intro_to_ios/week/1#!assignment).
 
 Rotten Tomatoes Dummy Data [#1](https://gist.githubusercontent.com/timothy1ee/d1778ca5b944ed974db0/raw/489d812c7ceeec0ac15ab77bf7c47849f2d1eb2b/gistfile1.json)
@@ -9,7 +11,7 @@ Rotten Tomatoes Dummy Data [#1](https://gist.githubusercontent.com/timothy1ee/d1
 
 API Key: "av2w54dpqt9fatk3tccb8b9w"
 
-Time spent: 3.43 hours
+Time spent: 4.13 hours
 
 ### Features
 
@@ -18,7 +20,7 @@ Time spent: 3.43 hours
 - [x] User can view a list of movies. Poster images load asynchronously.
 - [x] User can view movie details by tapping on a cell.
 - [x] User sees loading state while waiting for the API.
-- [ ] User sees error message when there is a network error: http://cl.ly/image/1l1L3M460c3C
+- [x] User sees error message when there is a network error: http://cl.ly/image/1l1L3M460c3C
 - [x] User can pull to refresh the movie list.
 
 #### Optional

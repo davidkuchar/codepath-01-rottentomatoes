@@ -12,9 +12,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="gDY-Iy-jJo">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Networking Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qBw-lr-AGO">
+                                    <rect key="frame" x="8" y="11" width="304" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="movieTableCell" rowHeight="121" id="bPV-2F-b0i" customClass="MovieTableCell" customModule="RottenTomatoes" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="86" width="320" height="121"/>
+                                <rect key="frame" x="0.0" y="130" width="320" height="121"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bPV-2F-b0i" id="Ijq-M7-cMQ">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="120"/>
@@ -61,6 +76,9 @@
                             <action selector="refreshMovies:" destination="8kE-qL-Obw" eventType="valueChanged" id="8Og-UI-RUZ"/>
                         </connections>
                     </refreshControl>
+                    <connections>
+                        <outlet property="networkingErrorAlertView" destination="gDY-Iy-jJo" id="VrZ-dp-2ix"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FSK-of-yhm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -17,10 +17,13 @@ import SVProgressHUD
 class MoviesTableViewController: UITableViewController {
 
     var moviesDictionaries: [NSDictionary]?
+    let rottenTomatoesURLString = "http://api.rottentomatoes.com/api/pulic/v1.0/lists/dvds/top_rentals.json?apikey=f2fk8pundhpxf77fscxvkupy"
+
+    @IBOutlet weak var networkingErrorAlertView: UIView!
 
     func loadMoviesData() {
-        let RottenTomatoesURLString = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=f2fk8pundhpxf77fscxvkupy"
-        let request = NSMutableURLRequest(URL: NSURL(string: RottenTomatoesURLString)!)
+        let request = NSMutableURLRequest(URL: NSURL(string: rottenTomatoesURLString)!)
+        
         NSURLConnection.sendAsynchronousRequest(request,
             queue: NSOperationQueue.mainQueue(),
             completionHandler: { (response, data, error) in
@@ -33,7 +36,12 @@ class MoviesTableViewController: UITableViewController {
                     NSLog("Dictionary: \(dictionary)")
                 } else {
                     
+                    self.refreshControl?.endRefreshing()
+                    SVProgressHUD.dismiss()
                     
+                    self.networkingErrorAlertView.hidden = false
+                    
+                    println("Network error!!")
                 }
             }
         )
@@ -41,6 +49,9 @@ class MoviesTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.networkingErrorAlertView.hidden = true
+        
 
         SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Gradient)
         self.loadMoviesData()
@@ -54,9 +65,6 @@ class MoviesTableViewController: UITableViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
-        
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
