@@ -2,6 +2,11 @@
 
 This is a movies app displaying box office and top rental DVDs using the [Rotten Tomatoes API](http://developer.rottentomatoes.com/docs/read/JSON).
 
+Assignment can be found [here](http://courses.codepath.com/courses/intro_to_ios/week/1#!assignment).
+
+Rotten Tomatoes Dummy Data [#1](https://gist.githubusercontent.com/timothy1ee/d1778ca5b944ed974db0/raw/489d812c7ceeec0ac15ab77bf7c47849f2d1eb2b/gistfile1.json)
+[#2](https://gist.githubusercontent.com/timothy1ee/e41513a57049e21bc6cf/raw/b490e79be2d21818f28614ec933d5d8f467f0a66/gistfile1.json)
+
 Time spent: `<Number of hours spent>`
 
 ### Features
