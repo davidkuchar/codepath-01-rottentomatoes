@@ -9,7 +9,7 @@ Rotten Tomatoes Dummy Data [#1](https://gist.githubusercontent.com/timothy1ee/d1
 
 API Key: "av2w54dpqt9fatk3tccb8b9w"
 
-Time spent: `<Number of hours spent>`
+Time spent: 3 hours
 
 ### Features
 

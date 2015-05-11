@@ -22,6 +22,9 @@ class MovieDetailsViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         let url = NSURL(string: movieDetails.valueForKeyPath("posters.detailed") as! String)!
+        
+        println(url)
+        
         movieImageView.setImageWithURL(url)
         
         movieTitleLabel.text = movieDetails["title"] as? String
