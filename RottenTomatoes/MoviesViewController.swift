@@ -8,20 +8,21 @@
 
 //TODO
 //
-//4. User sees loading state while waiting for movies API. You can use one of the 3rd party libraries at http://cocoapods.wantedly.com?q=hud.
-//5. User sees error message when there's a networking error. You may not use UIAlertView or a 3rd party library to display the error. See this screenshot for what the error message should look like: network error screenshot.
 
 import UIKit
 import SVProgressHUD
 
-class MoviesTableViewController: UITableViewController {
+class MoviesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var moviesDictionaries: [NSDictionary]?
     let rottenTomatoesURLString = "http://api.rottentomatoes.com/api/public/v1.0/lists/dvds/top_rentals.json?apikey=f2fk8pundhpxf77fscxvkupy"
 
-    @IBOutlet weak var networkingErrorAlertView: UIView!
+    @IBOutlet weak var moviesTableView: MovieTableView!
+    @IBOutlet weak var alertView: UIView!
+    var refreshControl:UIRefreshControl!
 
     func loadMoviesData() {
+        
         let request = NSMutableURLRequest(URL: NSURL(string: rottenTomatoesURLString)!)
         
         NSURLConnection.sendAsynchronousRequest(request,
@@ -29,17 +30,17 @@ class MoviesTableViewController: UITableViewController {
             completionHandler: { (response, data, error) in
                 if let dictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as! NSDictionary? {
                     self.moviesDictionaries = dictionary["movies"] as? [NSDictionary]
-                    self.tableView.reloadData()
+                    self.moviesTableView.reloadData()
                     self.refreshControl?.endRefreshing()
                     SVProgressHUD.dismiss()
                     
-                    NSLog("Dictionary: \(dictionary)")
+//                    NSLog("Dictionary: \(dictionary)")
                 } else {
                     
                     self.refreshControl?.endRefreshing()
                     SVProgressHUD.dismiss()
                     
-                    self.networkingErrorAlertView.hidden = false
+                    self.alertView.hidden = false
                     
                     println("Network error!!")
                 }
@@ -47,17 +48,24 @@ class MoviesTableViewController: UITableViewController {
         )
     }
     
+    func refreshMovies(sender:AnyObject)
+    {
+        // Code to refresh table view
+        self.loadMoviesData()
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.networkingErrorAlertView.hidden = true
+        self.alertView.hidden = true
         
-
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        self.refreshControl.addTarget(self, action: "refreshMovies:", forControlEvents: UIControlEvents.ValueChanged)
+        self.moviesTableView.addSubview(refreshControl)
+        
         SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Gradient)
-        self.loadMoviesData()
-    }
-
-    @IBAction func refreshMovies(sender: AnyObject) {
+        
         self.loadMoviesData()
     }
     
@@ -65,6 +73,7 @@ class MoviesTableViewController: UITableViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,11 +81,11 @@ class MoviesTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return moviesDictionaries?.count ?? 0
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCellWithIdentifier("movieTableCell") as! MovieTableCell
 
@@ -93,8 +102,13 @@ class MoviesTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+//
+    @IBAction func toggleViewType(sender: UISegmentedControl) {
+        
+//        sender.
     }
     
     // MARK: - Navigation
@@ -105,16 +119,18 @@ class MoviesTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
         
         let cell = sender as! UITableViewCell
-        let indexPath = tableView.indexPathForCell(cell)!
+        let indexPath = self.moviesTableView.indexPathForCell(cell)!
         
         let movieDetails = moviesDictionaries![indexPath.row]
         
         let movieDetailsViewContoller = segue.destinationViewController as! MovieDetailsViewController
         
         movieDetailsViewContoller.movieDetails = movieDetails
-        
-        println("I'm about to segue")
     }
+}
+
+class MovieTableView: UITableView {
+    
 }
 
 class MovieTableCell: UITableViewCell {
